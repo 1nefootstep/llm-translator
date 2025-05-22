@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>LLM Page Translator</title>
+    <style>
+        body {
+            font-family: sans-serif;
+            width: 250px; /* Adjusted width for better layout */
+            padding: 10px;
+            text-align: center; /* Center align content */
+        }
+        h3 {
+            margin-top: 0;
+            color: #333;
+        }
+        p {
+            font-size: 0.9em;
+            color: #555; /* Softer color for informational text */
+            margin-bottom: 15px; /* Add some space before the button */
+        }
+        button {
+            width: 100%; /* Make button full width */
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 1em; /* Slightly larger font for button */
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        #statusMessage {
+            margin-top: 10px;
+            font-size: 0.8em;
+            color: #777;
+            min-height: 1.2em; /* Reserve space for messages */
+        }
+    </style>
+</head>
+<body>
+    <h3>LLM Page Translator</h3>
+    <p>Target Language: <strong id="currentTargetLanguage">Loading...</strong></p>
+    <button id="translatePageButton">Translate Entire Page</button>
+    <div id="statusMessage"></div>
+    <script src="popup.js"></script>
+</body>
+</html>
