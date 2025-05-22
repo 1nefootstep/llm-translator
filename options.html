@@ -1,11 +1,27 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>LLM Translator Options</title>
     <style>
-        body { font-family: sans-serif; margin: 20px; max-width: 600px; }
-        label { display: block; margin-top: 15px; font-weight: bold; }
-        input[type='text'], input[type='password'], input[type='url'], input[type='number'], select, textarea {
+        body {
+            font-family: sans-serif;
+            margin: 20px;
+            max-width: 600px;
+        }
+
+        label {
+            display: block;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        input[type='text'],
+        input[type='password'],
+        input[type='url'],
+        input[type='number'],
+        select,
+        textarea {
             width: 100%;
             padding: 8px;
             margin-top: 5px;
@@ -13,8 +29,15 @@
             border-radius: 4px;
             box-sizing: border-box;
         }
-        textarea { min-height: 80px; }
-        .button-container { margin-top: 25px; }
+
+        textarea {
+            min-height: 80px;
+        }
+
+        .button-container {
+            margin-top: 25px;
+        }
+
         button {
             padding: 10px 15px;
             margin-right: 10px;
@@ -24,27 +47,47 @@
             background-color: #007bff;
             color: white;
         }
-        button#reset { background-color: #dc3545; }
-        button:hover { opacity: 0.9; }
-        .slider-container { display: flex; align-items: center; }
-        .slider-container input[type='range'] { flex-grow: 1; margin-right: 10px; }
-        .slider-container span { min-width: 30px; text-align: right; }
+
+        button#reset {
+            background-color: #dc3545;
+        }
+
+        button:hover {
+            opacity: 0.9;
+        }
+
+        .slider-container {
+            display: flex;
+            align-items: center;
+        }
+
+        .slider-container input[type='range'] {
+            flex-grow: 1;
+            margin-right: 10px;
+        }
+
+        .slider-container span {
+            min-width: 30px;
+            text-align: right;
+        }
     </style>
 </head>
+
 <body>
     <h1>LLM Translator Settings</h1>
 
     <label for="apiEndpoint">API Endpoint URL:</label>
-    <input type="url" id="apiEndpoint" placeholder="e.g., https://api.openai.com/v1/chat/completions">
+    <input type="url" id="apiEndpoint" placeholder="e.g., http://127.0.0.1:1234/v1/chat/completions">
 
     <label for="apiKey">API Key:</label>
     <input type="password" id="apiKey" placeholder="Enter your API Key">
 
     <label for="modelName">Model Name:</label>
-    <input type="text" id="modelName" placeholder="e.g., gpt-4o">
+    <input type="text" id="modelName" placeholder="e.g., qwen3-30b-a3b-mlx">
 
     <label for="systemPrompt">System Prompt:</label>
-    <textarea id="systemPrompt" placeholder="e.g., You are a helpful translation assistant. Translate the following text into {{TARGET_LANGUAGE}}."></textarea>
+    <textarea id="systemPrompt" placeholder="e.g., You are a helpful translation assistant. Translate the following text into {{TARGET_LANGUAGE}}. Do not miss any sentences. Only translate the text and do not reply with anything else.
+/no_think."></textarea>
 
     <label for="targetLanguage">Target Language:</label>
     <select id="targetLanguage">
@@ -63,13 +106,13 @@
 
     <label for="temperature">Temperature:</label>
     <div class="slider-container">
-        <input type="range" id="temperature" min="0" max="1" step="0.1">
-        <span id="temperatureValue">0.7</span>
+        <input type="range" id="temperature" min="0" max="1" step="0.01">
+        <span id="temperatureValue">0.8</span>
     </div>
 
 
     <label for="maxTokens">Max Tokens:</label>
-    <input type="number" id="maxTokens" min="50" placeholder="e.g., 2000">
+    <input type="number" id="maxTokens" min="50" placeholder="e.g., 32000">
 
     <div class="button-container">
         <button id="save">Save Settings</button>
@@ -78,4 +121,5 @@
 
     <script src="options.js"></script>
 </body>
+
 </html>
