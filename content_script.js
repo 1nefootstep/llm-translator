@@ -90,7 +90,11 @@ chrome.runtime.onMessage.addListener((request, sender, sendResponse) => {
     } else if (request.action === "translateStreamError") {
         console.error("LLM Translator: Stream error reported:", request.error, "Original text was:", request.originalText);
         if (currentTranslationElement) {
-            // Attempt to revert to original text
+            // Attempt to revert to original text.
+            // We use originalSelectedTextContent which was captured directly from the
+            // selection range at the start of the operation, ensuring the most accurate reversion.
+            // request.originalText (from background.js) is also available and logged for debugging,
+            // but originalSelectedTextContent is what was actually on the page.
             // This is a best-effort. If the DOM structure around currentTranslationElement changed,
             // simply setting textContent might not perfectly restore the original state,
             // but it's better than leaving a partial or error message in place.
