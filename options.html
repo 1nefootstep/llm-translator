@@ -76,18 +76,131 @@
 <body>
     <h1>LLM Translator Settings</h1>
 
-    <label for="apiEndpoint">API Endpoint URL:</label>
-    <input type="url" id="apiEndpoint" placeholder="e.g., http://127.0.0.1:1234/v1/chat/completions">
+    <!-- API Provider Management Section -->
+    <h2>API Providers</h2>
+    <div>
+        <label for="apiProvidersList">Configured Providers:</label>
+        <select id="apiProvidersList" size="5"></select>
+    </div>
+    <div class="button-container">
+        <button id="addProviderBtn">Add New Provider</button>
+        <button id="editProviderBtn">Edit Selected</button>
+        <button id="deleteProviderBtn">Delete Selected</button>
+        <button id="setActiveProviderBtn">Set as Active</button>
+    </div>
+    <div>
+        Current Active Provider: <strong id="activeProviderDisplay">None</strong>
+    </div>
 
-    <label for="apiKey">API Key:</label>
-    <input type="password" id="apiKey" placeholder="Enter your API Key">
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
 
-    <label for="modelName">Model Name:</label>
-    <input type="text" id="modelName" placeholder="e.g., qwen3-30b-a3b-mlx">
+    <!-- Add/Edit Provider Form (Initially Hidden) -->
+    <div id="providerFormContainer" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ddd;">
+        <h3 id="providerFormTitle">Add New Provider</h3>
+        <input type="hidden" id="editingProviderIdInput">
 
-    <label for="systemPrompt">System Prompt:</label>
-    <textarea id="systemPrompt" placeholder="e.g., You are a helpful translation assistant. Translate the following text into {{TARGET_LANGUAGE}}. Do not miss any sentences. Only translate the text and do not reply with anything else.
-/no_think."></textarea>
+        <label for="providerNameInput">Provider Name:</label>
+        <input type="text" id="providerNameInput" placeholder="e.g., My OpenAI GPT-4">
+
+        <label for="providerEndpointInput">API Endpoint URL:</label>
+        <input type="url" id="providerEndpointInput" placeholder="e.g., https://api.openai.com/v1/chat/completions">
+
+        <label for="providerApiKeyInput">API Key:</label>
+        <input type="password" id="providerApiKeyInput" placeholder="Enter API Key (leave blank to keep existing)">
+
+        <label for="providerModelInput">Model Name:</label>
+        <input type="text" id="providerModelInput" placeholder="e.g., gpt-4-turbo">
+        
+        <div>
+            <input type="checkbox" id="providerStreamSupportCheckbox" style="width: auto; margin-right: 5px;">
+            <label for="providerStreamSupportCheckbox" style="display: inline; margin-top: 0;">Supports Streaming</label>
+        </div>
+
+        <div class="button-container">
+            <button id="saveProviderBtn">Save Provider</button>
+            <button id="cancelProviderBtn">Cancel</button>
+        </div>
+    </div>
+
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+    <!-- System Prompt Profiles Management Section -->
+    <h2>System Prompt Profiles</h2>
+    <div>
+        <label for="promptProfilesList">Configured Profiles:</label>
+        <select id="promptProfilesList" size="5"></select>
+    </div>
+    <div class="button-container">
+        <button id="addProfileBtn">Add New Profile</button>
+        <button id="editProfileBtn">Edit Selected</button>
+        <button id="deleteProfileBtn">Delete Selected</button>
+        <button id="setActiveProfileBtn">Set as Active</button>
+    </div>
+    <div>
+        Current Active Profile: <strong id="activeProfileDisplay">None</strong>
+    </div>
+
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+    <!-- Add/Edit Profile Form (Initially Hidden) -->
+    <div id="profileFormContainer" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ddd;">
+        <h3 id="profileFormTitle">Add New Profile</h3>
+        <input type="hidden" id="editingProfileIdInput">
+
+        <label for="profileNameInput">Profile Name:</label>
+        <input type="text" id="profileNameInput" placeholder="e.g., Technical Translator">
+
+        <label for="profilePromptInput">System Prompt:</label>
+        <textarea id="profilePromptInput" placeholder="Enter system prompt text. Use {{TARGET_LANGUAGE}} where the target language should be inserted."></textarea>
+
+        <div class="button-container">
+            <button id="saveProfileBtn">Save Profile</button>
+            <button id="cancelProfileBtn">Cancel</button>
+        </div>
+    </div>
+
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+    <!-- Glossary Management Section -->
+    <h2>Glossary</h2>
+    <div>
+        <label for="glossaryTermsSelect">Configured Glossary Terms:</label>
+        <select id="glossaryTermsSelect" size="5"></select>
+    </div>
+    <div class="button-container">
+        <button id="addGlossaryTermBtn">Add New Term</button>
+        <button id="editGlossaryTermBtn">Edit Selected Term</button>
+        <button id="deleteGlossaryTermBtn">Delete Selected Term</button>
+    </div>
+
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+    <!-- Add/Edit Glossary Term Form (Initially Hidden) -->
+    <div id="glossaryTermFormContainer" style="display: none; margin-top: 20px; padding: 15px; border: 1px solid #ddd;">
+        <h3 id="glossaryTermFormTitle">Add New Glossary Term</h3>
+        <input type="hidden" id="editingGlossaryTermIdInput">
+
+        <label for="glossaryTermInput">Term:</label>
+        <input type="text" id="glossaryTermInput" placeholder="Enter source term">
+
+        <label for="glossaryTranslationInput">Translation:</label>
+        <input type="text" id="glossaryTranslationInput" placeholder="Enter target translation">
+        
+        <div>
+            <input type="checkbox" id="glossaryCaseSensitiveCheckbox" style="width: auto; margin-right: 5px;">
+            <label for="glossaryCaseSensitiveCheckbox" style="display: inline; margin-top: 0;">Case Sensitive</label>
+        </div>
+
+        <div class="button-container">
+            <button id="saveGlossaryTermBtn">Save Term</button>
+            <button id="cancelGlossaryTermBtn">Cancel</button>
+        </div>
+    </div>
+
+    <hr style="margin-top: 20px; margin-bottom: 20px;">
+
+    <!-- Global Settings -->
+    <h2>Global Settings</h2>
 
     <label for="targetLanguage">Target Language:</label>
     <select id="targetLanguage">
@@ -115,7 +228,7 @@
     <input type="number" id="maxTokens" min="50" placeholder="e.g., 32000">
 
     <div class="button-container">
-        <button id="save">Save Settings</button>
+        <button id="saveGlobalSettingsBtn">Save Global Settings</button>
         <button id="reset">Reset to Defaults</button>
     </div>
 
